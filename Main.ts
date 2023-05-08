@@ -1,5 +1,7 @@
-export  let readlineSync = require('readline-sync');
+import {ManagerStudents} from "./src/ManagerStudents";
 
+export  let readlineSync = require('readline-sync');
+let managerStudents: ManagerStudents = new ManagerStudents();
 let menuFunction: string[] = [
     'Show list Student',
     'Search Student (by name)',
@@ -13,18 +15,23 @@ function init() {
     while (loop) {
         switch (keySelect(menuFunction)) {
             case 0:
+                managerStudents.showListStudent();
                 pressEnterToBack();
                 break;
             case 1:
+                managerStudents.findStudentByName();
                 pressEnterToBack();
                 break;
             case 2:
+                managerStudents.addNewStudent();
                 pressEnterToBack();
                 break;
             case 3:
+                managerStudents.editInfoOfStudent()
                 pressEnterToBack();
                 break;
             case 4:
+                managerStudents.deleteStudentByID()
                 pressEnterToBack();
                 break;
             default:
@@ -33,9 +40,7 @@ function init() {
                 }
         }
     }
-
 }
-
 function keySelect(data: string[]) {
     return readlineSync.keyInSelect(data, 'Select function:')
 }
