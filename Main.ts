@@ -5,7 +5,7 @@ let managerStudents: ManagerStudents = new ManagerStudents();
 let menuFunction: string[] = [
     'Show list Student',
     'Search Student (by name)',
-    'Add information of Student',
+    'Add New Student',
     'Edit information of Student',
     'Delete Student'
 ]

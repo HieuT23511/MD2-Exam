@@ -47,6 +47,10 @@ export class ManagerStudents {
     inputInformationOfNewStudent():Student |undefined{
         let classDefault : string[]=['C0223G1','C0223H1','C0223A1','C0223E1'];
         let idStudent = readlineSync.question(`Enter id:`)
+        if(this.findIndexStudentByID(idStudent)!==-1){
+            console.log(`This is invalid! }`)
+            return
+        }
         let nameStudent = readlineSync.question(`Enter name: `);
         let classOfStudent = readlineSync.keyInSelect(classDefault,`Enter class: `);
         let addressOfStudent = readlineSync.question(`Enter address: `);
@@ -67,12 +71,17 @@ export class ManagerStudents {
         console.log(`Add new student successful! `)
 
     }
-    findIndexStudentByID(){
-        let idStudent = readlineSync.question(`Enter ID need to find: `)
-        return this.listStudent.findIndex(elements => idStudent === elements.getIdStudent());
+    findIndexStudentByID(id:string){
+
+        return this.listStudent.findIndex(elements => id === elements.getIdStudent());
     }
     editInfoOfStudent(){
-        let index = this.findIndexStudentByID();
+        let idStudent = readlineSync.question(`Enter ID need to find: `);
+        if(this.findIndexStudentByID(idStudent)===-1){
+            console.log(`This ID is invalid! `)
+            return
+        }
+        let index = this.findIndexStudentByID(idStudent);
         if (index !== -1) {
             let updateStudent = this.inputInformationOfNewStudent();
             if(updateStudent){
@@ -86,7 +95,8 @@ export class ManagerStudents {
         }
     }
     deleteStudentByID(){
-        let index = this.findIndexStudentByID()
+        let idStudent = readlineSync.question(`Enter ID need to find: `);
+        let index = this.findIndexStudentByID(idStudent);
         if(index===-1){
             console.log(`Not existed Student need to delete!`);
             return;
